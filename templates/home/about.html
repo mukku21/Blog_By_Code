@@ -1,0 +1,45 @@
+{% extends 'home/common.html' %}
+{% block title %} I am about {% endblock %}
+{% block aboutactive %}active{% endblock aboutactive %}
+{% block show %}none{% endblock show %}
+
+{% block body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+<div class="container">
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <span class="avatar"><img src="{% static 'images/mk.jpg' %}" alt="" /></span>
+            <h1>We are <strong>Coder</strong> <br> iCoder About Us </h1>
+            <ul class="icons">
+                <li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
+                <li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+            </ul>
+        </header>
+        <p>Guido Van Rossum published the first version of Python code (version 0.9.0) at alt.sources in February 1991.
+            This release included already exception handling, functions, and the core data types of list, dict, str and
+            others. It was also object oriented and had a module system.
+
+            Python version 1.0 was released in January 1994. The major new features included in this release were the
+            functional programming tools lambda, map, filter and reduce, which Guido Van Rossum never liked.
+
+            Six and a half years later in October 2000, Python 2.0 was introduced. This release included list
+            comprehensions, a full garbage collector and it was supporting unicode.
+
+            Python flourished for another 8 years in the versions 2.x before the next major release as Python 3.0 (also
+            known as "Python 3000" and "Py3K") was released. Python 3 is not backwards compatible with Python 2.x. The
+            emphasis in Python 3 had been on the removal of duplicate programming constructs and modules, thus
+            fulfilling or coming close to fulfilling the 13th law of the Zen of Python: "There should be one -- and
+            preferably only one -- obvious way to do it."</p>
+
+    </div>
+</div>
+</body>
+
+
+{% endblock %}

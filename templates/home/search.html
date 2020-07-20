@@ -1,0 +1,36 @@
+{% extends 'home/common.html' %}
+{% block title %} Search Result {% endblock %}
+{% block body %}
+<div class="container">
+<h2>Search: {{sresult}} Result </h2>
+{% if sresult == 0 %}
+<p>No search results 😢😢😢 </p>
+Your search query: <b>{{query}}</b> did not match any documents.<br>
+Suggestions:
+<ul>
+<li>Make sure that all words are spelled correctly.</li>
+<li>Try different keywords.</li>
+<li>Try more general keywords.</li>
+<li>Try fewer keywords.</li>
+</ul>
+{% endif %}
+ <div class="row mb-2">
+ {% for result in allPost %}
+        <div class="col-md-6">
+            <div
+                class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">{{result.author}}</strong>
+                    <h3 class="mb-0"> {{result.title|truncatechars:20}} </h3>
+                    <div class="mb-1 text-muted">{{result.timeStamp}} </div>
+                    <p class="card-text mb-auto">{{result.subContent|truncatechars:50}}</p>
+                    <a href="blog/{{result.slug}}" role='button'  class="btn-btn-primary">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                <img class="card-img-right flex-auto d-none d-md-block" data-src="" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="/media/{{result.thumbnail}}" data-holder-rendered="true">
+                </div>
+            </div>  
+        </div>{% endfor %}   
+    </div>
+</div>
+{% endblock %}

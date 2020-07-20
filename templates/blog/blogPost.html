@@ -1,0 +1,114 @@
+{% extends 'home/common.html' %}
+{% block title %}Blog_Post{% endblock %}
+{% block blogpostactive %}active{% endblock blogpostactive %}
+
+
+{% block body %}
+<div class="container">
+    <h3>Coding Article:</h3>
+    <div class="row no-gutters border rounded overflow-hidden mb-4 shadow-sm ">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-light">Article by: {{post.author}} ({{post.views}} Views)</strong>
+            <h3 class="mb-0">{{post.title}}</h3>
+            <div class="mb-1 text-muted"> {{post.timeStamp}} </div>
+            <p class="card-text mb-auto" style="white-space: pre-wrap;">{{post.content|safe}}</p>
+        </div>
+        {% comment %} <div class="col-auto d-none d-lg-block">
+            <img class="card-img-right flex-auto d-none d-md-block" data-src="" alt="Thumbnail [200x250]"
+                style="width: 200px; height: 250px;" src="/media/{{post.thumbnail}}" data-holder-rendered="true">
+
+        </div> {% endcomment %}
+    </div>
+</div>
+
+<div class="container mb-5">
+    <h4>Comments:({{comments.count}})</h4>
+    {% if user.is_authenticated %}
+    <form action="postComment" method="POST"> {% csrf_token %}
+        {% comment %} <input type="text" name="comment" placeholder="enter comment here"> {% endcomment %}
+        <div class="input-group flex-nowrap m-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">@</span>
+            </div>
+            <input type="text" name="comment" class="form-control" placeholder="Enter your comment here."
+                aria-label="Comment" aria-describedby="addon-wrapping">
+        </div>
+        <input type="hidden" name="postSno" value="{{post.sno}}">
+        <input type="hidden" name="parentSno" value="">
+        {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+        <button type="submit" class="btn btn-outline-success">Comment</button>
+    </form>
+    {% else %}
+    <button type="button" data-toggle="modal" data-target="#signinModal" class="btn btn-outline-success">Sign in to
+        comment</button>
+    {% endif %}
+
+    {% load static %}
+    {% load humanize %}
+    {% load extras %}
+    {% for comment in comments  %}
+    <div class="row my-2">
+        <div class="col-md-1">
+            <img class="border border-success" src="{% static 'images/icon.png' %}" alt="">
+        </div>
+        <div class="col-md-11"><strong>User: {{comment.user.username}}</strong> on {{comment.timestamp}} <span
+                class="badge badge-info">{{comment.timestamp|naturaltime}}</span>
+            <div>
+                <strong>Comment: </strong> {{comment.comment}}
+            </div>
+
+            <div class="reply mx-0">
+
+                <p>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#replyBox{{comment.sno}}" role="button"
+                        aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
+                        View Replys <span class="badge badge-light">{{replyDict|get_val:comment.sno|length}}</span>
+                    </a>
+                    {% if user.is_authenticated %}
+                    <button class="btn btn-primary" type="button" data-toggle="collapse"
+                        data-target="#replyBox{{comment.sno}}" aria-expanded="false"
+                        aria-controls="replyBox{{comment.sno}}">
+                        Reply
+                    </button>
+                    {% endif %}
+                </p>
+                <div class="collapse" id="replyBox{{comment.sno}}">
+                    <div class="card card-body">
+                        {% for reply in replyDict|get_val:comment.sno %}
+                        <div class="row my-1">
+                             <div class="col-md-1">
+                                 <img class="rounded border border-primary" style="width: 30px; height: 35px;" src="{% static 'images/icon.png' %}" alt="">
+                                </div>
+                            <div class="col-md-11">
+                            <strong>{{reply.user.username}}</strong> 
+                            <span class="badge badge-info">{{reply.timestamp|naturaltime}}</span>
+                            <div>
+                            {{reply.comment}}
+                            </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% if user.is_authenticated %}
+                        <form action="postComment" method="POST"> {% csrf_token %}
+                            <div class="input-group flex-nowrap m-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="addon-wrapping">@
+                                        {{comment.user.username}}</span>
+                                </div>
+                                <input type="text" name="comment" class="form-control" placeholder="Enter a reply."
+                                    aria-label="Comment" aria-describedby="addon-wrapping">
+                            </div>
+                            <input type="hidden" name="parentSno" value="{{comment.sno}}">
+                            <input type="hidden" name="postSno" value="{{post.sno}}">
+                            <button type="submit" class="btn btn-outline-success">Send</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

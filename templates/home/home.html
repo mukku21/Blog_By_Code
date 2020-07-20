@@ -1,0 +1,42 @@
+{% extends 'home/common.html' %}
+
+{% block title %} I am home {% endblock %}
+
+{% block homeactive %}active{% endblock homeactive %}
+
+{% block css %}{% endblock css %}
+
+{% block body %}
+{% comment %} big box {% endcomment %}
+
+<div class="container my-2">
+    {% comment %} Popular BlogPost Start from here {% endcomment %}
+    <h2 class='mb-4'>Popular Blogpost:</h2>     
+    {% comment %} Here one box {% endcomment %}
+ 
+    <div class="row mb-2">
+        {% for i in post  %}
+        <div class="col-md-6">
+            <div
+                class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-light">Popular ({{i.views}} Views)</strong>
+                    <h5 class="mb-0">{{i.title|truncatechars:20}}</h5>
+                    <div class="mb-1 text-muted">{{i.timestamp}}</div>
+                    <p class="card-text mb-auto">{{i.subContent|truncatechars:100}}.</p>
+                    <a href="blog/{{i.slug}}" role="button" class="button"><span>Reading..</span></a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img class="card-img-right flex-auto d-none d-md-block" data-src="" alt="Thumbnail [200x250]"
+                    style="width: 200px; height: 250px;" src="/media/{{i.thumbnail}}" alt="">
+                </div>
+            </div>
+        </div>{% endfor %}
+    </div>
+</div>
+
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}

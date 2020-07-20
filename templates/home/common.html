@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+  <title>{% block title %}{% endblock title %}</title>
+</head>
+<style>
+body{
+  background-color: rgba(10, 10, 10, 0.082);
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+#sign input[type="text"],
+#sign input[type="email"],
+#sign input[type="tel"],
+#sign input[type="password"],
+#sign button[type="submit"] {
+  font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+}
+#signin input[type="text"],
+#signin input[type="password"],
+#signin button[type="submit"] {
+  font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+}
+
+#sign {
+  background: #F9F9F9;
+  padding: 10px;
+  margin: 1px 1px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+#signin {
+  background: #F9F9F9;
+  padding: 10px;
+  margin: 1px 1px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+fieldset {
+  border: medium none !important;
+  margin: 0 0 5px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+#sign input[type="text"],
+#sign input[type="email"],
+#sign input[type="tel"],
+#sign input[name="pass"]{
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+
+#signin input[type="text"],
+#signin input[name="pass"]{
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+#sign input[type="text"]:hover,
+#sign input[type="email"]:hover,
+#sign input[type="tel"]:hover,
+#sign input[type="password"]:hover{
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
+  border: 1px solid #aaa;
+}
+
+#sign button[type="submit"] {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+#sign button[type="submit"]:active {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#sign input:focus{
+  outline: 0;
+  border: 1px solid #aaa;
+}
+
+::-webkit-input-placeholder {
+  color: #888;
+}
+
+:-moz-placeholder {
+  color: #888;
+}
+
+::-moz-placeholder {
+  color: #888;
+}
+
+:-ms-input-placeholder {
+  color: #888;
+}
+{% block css %}{% endblock css %}
+</style>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">iCoder</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {% block homeactive %}{% endblock homeactive %}">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item {% block blogactive %}{% endblock blogactive %}">
+          <a class="nav-link" href="/blog">Blog </a>
+        </li>
+        <li class="nav-item {% block aboutactive %}{% endblock aboutactive %}">
+          <a class="nav-link" href="/about">About Us </a>
+        </li>
+        <li class="nav-item {% block contactactive %}{% endblock contactactive %}">
+          <a class="nav-link" href="/contact">Contact </a>
+        </li>
+      </ul>
+      <form method="GET" action='/search' class="form-inline my-2 my-lg-0 mx-3">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='query'
+          id='search' required>
+        <button class="btn btn-outline-success m-1 my-sm-0" type="submit">Search</button>
+      </form>
+      {% if user.is_authenticated %}
+      <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    welcome {{request.user}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/signout">Logout</a>
+  </div>
+</div>
+      {% else %}
+      <!-- Button login -->
+      <button type="button" class="btn btn-outline-success m-1 my-sm-0 " data-toggle="modal" data-target="#signinModal">
+        Login
+      </button>
+      <!-- Button Signup -->
+      <button type="button" class="btn btn-outline-success m-1 my-sm-0" data-toggle="modal" data-target="#signupModal">
+        Signup!
+      </button>
+      {% endif %}
+    </div>
+  </nav>
+
+  {% load splitString %}
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% load static %}
+
+  <div id="carouselman" class="carousel slide" style="display: {% block show %}{% endblock show %};" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselman" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselman" data-slide-to="1"></li>
+    <li data-target="#carouselman" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'images/Mk.jpeg' %}" class="d-block w-100" style="height: 500px;" alt="Future_Under_Contruction">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>It's Your Blog</h5>
+        <p>No one is going to push you in bright place, Push Your Self! Now..</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://source.unsplash.com/1500x500/?coding,mac" class="d-block w-100" style="height: 500px;" alt="Future_Under_Contruction">
+       <div class="carousel-caption d-none d-md-block">
+        <h5>Keep Learning</h5>
+        <p>How will you learn? Until you do.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://source.unsplash.com/1500x500/?code,intel" class="d-block w-100" style="height: 500px;" alt="Future_Under_Contruction">
+        <div class="carousel-caption d-none d-md-block">
+        <h5>1yr spent</h5>
+        <p>Waiting for result or will make my own.</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselman" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselman" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+  <!-- SignUpModal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalTitle">Signup Here!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="sign" action="/signup" method="post">{% csrf_token %}
+            <fieldset>
+              <label for="username">Username:</label>
+              <input placeholder="Username" name="username" id="username" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+              <label for="fname">First Name:</label>
+              <input placeholder="First Name" name="fname" id="fname" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+              <label for="lname">Last Name:</label>
+              <input placeholder="Last Name" name="lname" id="lname" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+              <label for="email">Your Email Address:</label>
+              <input placeholder="Your Email Address" name="email" id="email" type="email" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+              <label for="phone">Your Phone Number:</label>
+              <input placeholder="Your Phone Number" name="phone" id="phone" type="tel" tabindex="3" required>
+            </fieldset>
+            <fieldset>
+              <label for="pass1">Password:</label>
+              <input placeholder="Set Password" name="pass1" type="password" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+              <label for="pass2">Confirm Password:</label>
+              <input placeholder="Confirm Password" name="pass2" type="password" tabindex="1" required autofocus>
+            </fieldset>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SigninModal -->
+  <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signinModalTitle">Sign in!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="signin" action="/signin" method="post">{% csrf_token %}
+            <fieldset>
+              <label for="signinusername">Username:</label>
+              <input placeholder="Username" name="signinusername" id="signinusername" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+              <label for="signinpass">Password:</label>
+              <input placeholder="Enter Password" name="signinpass" id="signinpass" type="password" tabindex="1" required autofocus>
+            </fieldset>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block body %}{% endblock body %}
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  {% block js %}
+  {% endblock js %}
+  
+  <!-- footer -->
+  <footer id="footer">
+    <p>&copy; iCoder. All rights reserved <a href="">www.iCoder.com </a><a href="#">Keep Doing!</a>.</p>
+</footer>
+</body>
+
+</html>

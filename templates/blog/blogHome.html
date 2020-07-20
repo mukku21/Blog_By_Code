@@ -1,0 +1,27 @@
+{% extends 'home/common.html' %}
+{% block title %} BlogHome {% endblock %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block css %}{% endblock css %}
+{% block body %}
+{% load humanize %}
+<div class="container p-2">
+<h3>Coding Article:</h3>
+</div>
+{% for post in post %}
+<div class="container"> 
+    <div class="row no-gutters border rounded overflow-hidden mb-4 shadow-sm  ">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Article by: {{post.author}} ({{post.views}} Views) <span class="badge badge-info">{{post.timeStamp|naturaltime}}</span> </strong>
+            <h3 class="mb-0"><a class="text-dark" href="{{post.slug}}">{{post.title}}</a></h3>
+            <div class="mb-1 text-muted"> {{post.timeStamp}} </div>
+            <p class="card-text mb-auto">{{post.subContent|truncatechars:218}}</p>
+            <a href="{{post.slug}}" role="button"  class="button"><span>Reading..</span></a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+       <a href="{{post.slug}}" ><img class="card-img-right flex-auto d-none d-md-block" data-src="" alt="Thumbnail [400x250]" style="width: 350px; height: 270px; padding:1px; " src="/media/{{post.thumbnail}}" data-holder-rendered="true"></a> 
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
