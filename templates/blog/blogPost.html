@@ -1,5 +1,5 @@
 {% extends 'home/common.html' %}
-{% block title %}Blog_Post{% endblock %}
+{% block title %}Blog_Post_😑{% endblock %}
 {% block blogpostactive %}active{% endblock blogpostactive %}
 
 
@@ -8,9 +8,9 @@
     <h3>Coding Article:</h3>
     <div class="row no-gutters border rounded overflow-hidden mb-4 shadow-sm ">
         <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-light">Article by: {{post.author}} ({{post.views}} Views)</strong>
+            <strong class="d-inline-block mb-2 text-light">Article by: {{post.author}}<span class='badge badge-success mx-2'>{{post.views}} Views</span></strong>
             <h3 class="mb-0">{{post.title}}</h3>
-            <div class="mb-1 text-muted"> {{post.timeStamp}} </div>
+            <div class="mb-1 text-light"> {{post.timeStamp}} </div>
             <p class="card-text mb-auto" style="white-space: pre-wrap;">{{post.content|safe}}</p>
         </div>
         {% comment %} <div class="col-auto d-none d-lg-block">
@@ -31,7 +31,7 @@
                 <span class="input-group-text" id="addon-wrapping">@</span>
             </div>
             <input type="text" name="comment" class="form-control" placeholder="Enter your comment here."
-                aria-label="Comment" aria-describedby="addon-wrapping">
+                aria-label="Comment" aria-describedby="addon-wrapping" required>
         </div>
         <input type="hidden" name="postSno" value="{{post.sno}}">
         <input type="hidden" name="parentSno" value="">
@@ -96,7 +96,7 @@
                                         {{comment.user.username}}</span>
                                 </div>
                                 <input type="text" name="comment" class="form-control" placeholder="Enter a reply."
-                                    aria-label="Comment" aria-describedby="addon-wrapping">
+                                    aria-label="Comment" aria-describedby="addon-wrapping" required>
                             </div>
                             <input type="hidden" name="parentSno" value="{{comment.sno}}">
                             <input type="hidden" name="postSno" value="{{post.sno}}">

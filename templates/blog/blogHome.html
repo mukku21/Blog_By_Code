@@ -1,5 +1,5 @@
 {% extends 'home/common.html' %}
-{% block title %} BlogHome {% endblock %}
+{% block title %}Blogs_🙂{% endblock %}
 {% block blogactive %}active{% endblock blogactive %}
 {% block css %}{% endblock css %}
 {% block body %}
@@ -11,9 +11,9 @@
 <div class="container"> 
     <div class="row no-gutters border rounded overflow-hidden mb-4 shadow-sm  ">
         <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Article by: {{post.author}} ({{post.views}} Views) <span class="badge badge-info">{{post.timeStamp|naturaltime}}</span> </strong>
+            <strong class="d-inline-block mb-2 text-light">Article by: {{post.author}}<span class='badge badge-success mx-2'>{{post.views}} Views</span><span class="badge badge-info">{{post.timeStamp|naturaltime}}</span> </strong>
             <h3 class="mb-0"><a class="text-dark" href="{{post.slug}}">{{post.title}}</a></h3>
-            <div class="mb-1 text-muted"> {{post.timeStamp}} </div>
+            <div class="mb-1 text-light"> {{post.timeStamp}} </div>
             <p class="card-text mb-auto">{{post.subContent|truncatechars:218}}</p>
             <a href="{{post.slug}}" role="button"  class="button"><span>Reading..</span></a>
         </div>

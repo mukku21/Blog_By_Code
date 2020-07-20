@@ -1,5 +1,5 @@
 {% extends 'home/common.html' %}
-{% block title %} I am contact {% endblock %}
+{% block title %}Contact_😎{% endblock %}
 {% block css %}
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
 * {
@@ -144,7 +144,7 @@ fieldset {
 {% block body %}
 <div class="container my-3">  
   <form id="contact" action="/contact" method="post">{% csrf_token %}
-    <h3>iCoder Contact</h3>
+    <h3>CodeByUs Contact</h3>
     <h4>Contact us for query</h4>
     <fieldset>
       <input placeholder="Your name" name="name" type="text" tabindex="1" required autofocus>
@@ -164,7 +164,7 @@ fieldset {
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
-    <p class="copyright">Never Ever Give_Up <a href="/" target="_blank" title="icoder">iCoder</a></p>
+    <p class="copyright">Never Ever Give_Up <a href="/" target="_blank" title="icoder">CodeByUs</a></p>
   </form>
 </div>
 
