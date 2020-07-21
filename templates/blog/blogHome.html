@@ -14,7 +14,7 @@
             <strong class="d-inline-block mb-2 text-light">Article by: {{post.author}}<span class='badge badge-success mx-2'>{{post.views}} Views</span><span class="badge badge-info">{{post.timeStamp|naturaltime}}</span> </strong>
             <h3 class="mb-0"><a class="text-dark" href="{{post.slug}}">{{post.title}}</a></h3>
             <div class="mb-1 text-light"> {{post.timeStamp}} </div>
-            <p class="card-text mb-auto">{{post.subContent|truncatechars:218}}</p>
+            <p class="card-text mb-auto" style="color: cornsilk;">{{post.subContent|truncatechars:218}}</p>
             <a href="{{post.slug}}" role="button"  class="button"><span>Reading..</span></a>
         </div>
         <div class="col-auto d-none d-lg-block">

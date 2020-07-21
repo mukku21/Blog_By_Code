@@ -42,7 +42,7 @@ def search(request):
     else:
         PostTitle = Post.objects.filter(title__icontains=query)
         PostContent = Post.objects.filter(content__icontains=query)
-        allPost = PostTitle.union(PostContent)
+        allPost = PostTitle.union(PostContent).order_by('-views')
         if len(allPost) == 0:
             messages.info(request, "No search results found")
     params = {"allPost":allPost, 'sresult':len(allPost),"query":query}

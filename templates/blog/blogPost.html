@@ -10,8 +10,8 @@
         <div class="col p-4 d-flex flex-column position-static">
             <strong class="d-inline-block mb-2 text-light">Article by: {{post.author}}<span class='badge badge-success mx-2'>{{post.views}} Views</span></strong>
             <h3 class="mb-0">{{post.title}}</h3>
-            <div class="mb-1 text-light"> {{post.timeStamp}} </div>
-            <p class="card-text mb-auto" style="white-space: pre-wrap;">{{post.content|safe}}</p>
+            <div class="mb-1"><span class="badge badge-info" >{{post.timeStamp}}</span> </div>
+            <p class="card-text mb-auto text-white"><div  style="color: cornsilk;">{{post.content|safe}}</div></p>
         </div>
         {% comment %} <div class="col-auto d-none d-lg-block">
             <img class="card-img-right flex-auto d-none d-md-block" data-src="" alt="Thumbnail [200x250]"
