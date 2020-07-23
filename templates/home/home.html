@@ -1,6 +1,6 @@
 {% extends 'home/common.html' %}
 
-{% block title %} I am home {% endblock %}
+{% block title %}HoMe😀{% endblock %}
 
 {% block homeactive %}active{% endblock homeactive %}
 
@@ -8,7 +8,7 @@
 
 {% block body %}
 {% comment %} big box {% endcomment %}
-
+{% load humanize %}
 <div class="container my-2">
     {% comment %} Popular BlogPost Start from here {% endcomment %}
     <h2 class='mb-4'>Popular Blogpost:</h2>     
@@ -20,10 +20,12 @@
             <div
                 class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-light">Popular ({{i.views}} Views)</strong>
-                    <h5 class="mb-0">{{i.title|truncatechars:20}}</h5>
-                    <div class="mb-1 text-muted">{{i.timestamp}}</div>
-                    <p class="card-text mb-auto">{{i.subContent|truncatechars:100}}.</p>
+                    <strong class="d-inline-block mb-2 text-light">Popular: <span class='badge badge-success mx-2'>{{i.views}} Views</span><span class='badge badge-primary'>{{i.timeStamp|naturaltime}}</span></strong>
+                    <strong class="d-inline-block mb-2 text-light">By {{i.author}}</strong>
+                    
+                    <h5 class="mb-0"><b>{{i.title|truncatechars:20}}</b></h5>
+                    {% comment %} <div class="mb-1 text-light">{{i.timeStamp}}</div> {% endcomment %}
+                    <p class="card-text mb-auto" style="color:cornsilk;" >{{i.subContent|truncatechars:100}}.</p>
                     <a href="blog/{{i.slug}}" role="button" class="button"><span>Reading..</span></a>
                 </div>
                 <div class="col-auto d-none d-lg-block">

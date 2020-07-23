@@ -10,13 +10,12 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <link rel = "icon" href ="{% static 'images/mk.jpg' %}" type = "image/x-icon">
+    <script src="{% static 'assets/js/modernizr.custom.js' %}"></script> 
 
   <title>{% block title %}{% endblock title %}</title>
 </head>
 <style>
-body{
-  background-color: rgba(10, 10, 10, 0.082);
-}
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -123,8 +122,8 @@ fieldset {
 </style>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="/">iCoder</a>
+  <nav class="cl-effect-2 navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/"><span data-hover="CodeByUs">CodeByUs</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -133,22 +132,22 @@ fieldset {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item {% block homeactive %}{% endblock homeactive %}">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/"><span data-hover="Home">Home</span></a>
         </li>
         <li class="nav-item {% block blogactive %}{% endblock blogactive %}">
-          <a class="nav-link" href="/blog">Blog </a>
+          <a class="nav-link" href="/blog"><span data-hover="Blog">Blog</span></a>
         </li>
         <li class="nav-item {% block aboutactive %}{% endblock aboutactive %}">
-          <a class="nav-link" href="/about">About Us </a>
+          <a class="nav-link" href="/about"><span data-hover="About Us">About Us</span></a>
         </li>
         <li class="nav-item {% block contactactive %}{% endblock contactactive %}">
-          <a class="nav-link" href="/contact">Contact </a>
+          <a class="nav-link" href="/contact"><span data-hover="Contact">Contact</span></a>
         </li>
       </ul>
-      <form method="GET" action='/search' class="form-inline my-2 my-lg-0 mx-3">
+      <form method="GET" action='/search' class="form-inline my-1 my-lg-0 mx-3">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='query'
           id='search' required>
-        <button class="btn btn-outline-success m-1 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-light m-1 my-sm-0" type="submit">Search</button>
       </form>
       {% if user.is_authenticated %}
       <div class="dropdown">
@@ -161,18 +160,16 @@ fieldset {
 </div>
       {% else %}
       <!-- Button login -->
-      <button type="button" class="btn btn-outline-success m-1 my-sm-0 " data-toggle="modal" data-target="#signinModal">
+      <button type="button" class="btn btn-outline-light m-1 my-sm-0 " data-toggle="modal" data-target="#signinModal">
         Login
       </button>
       <!-- Button Signup -->
-      <button type="button" class="btn btn-outline-success m-1 my-sm-0" data-toggle="modal" data-target="#signupModal">
+      <button type="button" class="btn btn-outline-light m-1 my-sm-0" data-toggle="modal" data-target="#signupModal">
         Signup!
       </button>
       {% endif %}
     </div>
   </nav>
-
-  {% load splitString %}
 
   {% if messages %}
   {% for message in messages %}
@@ -322,7 +319,7 @@ fieldset {
   
   <!-- footer -->
   <footer id="footer">
-    <p>&copy; iCoder. All rights reserved <a href="">www.iCoder.com </a><a href="#">Keep Doing!</a>.</p>
+    <p class="text-white">&copy;CodeByUs-2020. All rights reserved <a href="/" class="text-white">www.CodeByUs.com </a><a href="/" class="text-white">Keep Doing!</a></p>
 </footer>
 </body>
 
